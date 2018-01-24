@@ -21,7 +21,7 @@ request ({
                 console.log('not able to connect with server');
             }else {
                 const temperature = JSON.parse(body).currently.temperature;
-                console.log('temperature: '+ tempe);
+                console.log('temperature: '+ temperature);
             }
         });
         console.log(JSON.parse(body).results[0].formatted_address);
