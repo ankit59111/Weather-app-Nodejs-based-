@@ -11,10 +11,22 @@ request ({
     }else if(JSON.parse(body).status === 'ZERO_RESULTS'){
         console.log(`invalid address`);
     }else if(JSON.parse(body).status === 'OK'){
-
+           const latitude = JSON.parse(body).results[0].geometry.location.lat;
+           const longitude = JSON.parse(body).results[0].geometry.location.lng;
+        request({
+            url:`https://api.darksky.net/forecast/a52d3b8d259d073d0f0c0f2a97bf5432/${latitude},${longitude}`,
+            JSON:true
+        },(error,response,body)=>{
+            if(error) {
+                console.log('not able to connect with server');
+            }else {
+                const temperature = JSON.parse(body).currently.temperature;
+                console.log('temperature: '+ tempe);
+            }
+        });
         console.log(JSON.parse(body).results[0].formatted_address);
         console.log(`latitude :${ JSON.parse(body).results[0].geometry.location.lat}`);
-        console.log(`longitude: ${JSON.parse(body).geometry.location.lng}`);
+        console.log(`longitude: ${JSON.parse(body).results[0].geometry.location.lng}`);
     }
 });
 
